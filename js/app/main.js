@@ -13,6 +13,4 @@ require(["pattern", "world", "life"], function(pattern, world, life) {
   world.redraw();
 
   life.attachWorld(world);
-
-  life.start();
 });

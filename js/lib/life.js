@@ -7,12 +7,12 @@ define(["world"], function(world) {
     this.world = world;
   };
 
-  Life.prototype.start = function() {
+  Life.prototype.start = function(interval) {
     var self = this;
     setInterval(function() {
       self.nextGeneration = world.draw(self.world.options);
       self.reproduce();
-    }, 500);
+    }, interval);
     // this.nextGeneration = world.draw(this.world.options);
     // this.reproduce();
   };
