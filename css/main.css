@@ -1,6 +1,6 @@
 body {
   padding: 20px 0;
-  font-size: 1px;
+  font-size: 14px;
 }
 
 #controls {
@@ -29,4 +29,10 @@ body {
 
 #world .alive {
   background: #000;
+}
+
+#interval-length-input {
+  width: auto;
+  display: inline;
+  margin-bottom: 15px;
 }
