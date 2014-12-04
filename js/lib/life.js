@@ -13,8 +13,6 @@ define(["world"], function(world) {
       self.nextGeneration = world.draw(self.world.options);
       self.reproduce();
     }, interval);
-    // this.nextGeneration = world.draw(this.world.options);
-    // this.reproduce();
   };
 
   Life.prototype.reproduce = function() {
