@@ -1,9 +1,10 @@
 body {
-  padding-bottom: 100px;
+  padding: 20px 0;
   font-size: 1px;
 }
 
 #controls {
+  text-align: center;
 }
 
 #canvas {
@@ -11,11 +12,15 @@ body {
 }
 
 #world {
-  width: 100%;
+  width: auto;
+  min-width: 750px;
+  margin: 0 auto;
 }
 
 #world td {
   border: 1px solid #dcdcdc;
+  width: 5px;
+  height: 5px;
 }
 
 #world .dead {

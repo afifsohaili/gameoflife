@@ -1,7 +1,7 @@
 require(["pattern", "world", "life"], function(pattern, world, life) {
   world = world.map({
-    rows: 30,
-    columns: 50,
+    rows: 50,
+    columns: 150,
     world: "#world",
     cellTemplate: "<td class=\"dead\"></td>"
   });
