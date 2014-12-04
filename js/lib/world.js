@@ -7,7 +7,7 @@ define(["cell"], function(cell) {
     this.worldElement = options.world;
     this.cellTemplate = options.cellTemplate;
     this.options = options;
-    this.draw();
+    this.init();
     this.associateCells();
   }
 
@@ -24,7 +24,7 @@ define(["cell"], function(cell) {
     });
   };
 
-  World.prototype.draw = function() {
+  World.prototype.init = function() {
     var world = $(this.worldElement);
     world.html("");
     for (var rowIndex = 0; rowIndex < this.rows; rowIndex++) {
