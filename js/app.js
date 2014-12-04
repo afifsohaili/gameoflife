@@ -7,7 +7,8 @@ requirejs.config({
         "cell" : ["jquery"],
         "world" : ["cell"],
         "pattern" : ["cell"],
-        "life" : ["world"]
+        "life" : ["world"],
+        "controls" : ["life"]
     }
 });
 

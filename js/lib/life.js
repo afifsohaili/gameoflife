@@ -9,10 +9,10 @@ define(["world"], function(world) {
 
   Life.prototype.start = function(interval) {
     var self = this;
-    setInterval(function() {
-      self.nextGeneration = world.draw(self.world.options);
-      self.reproduce();
-    }, interval);
+    return setInterval(function() {
+              self.nextGeneration = world.draw(self.world.options);
+              self.reproduce();
+            }, interval);
   };
 
   Life.prototype.reproduce = function() {
