@@ -17,7 +17,7 @@ define(["cell"], function(cell) {
     }
     var self = this;
     $(self.worldElement + " td").each(function(index) {
-      row = Math.floor(index / self.columns);
+      row = parseInt(index / self.columns);
       column = index % self.columns;
       self.cells[row][column] = cell.spawn(this, row, column);
       var x = 0;
