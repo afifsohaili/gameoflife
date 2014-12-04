@@ -6,21 +6,8 @@ define(function() {
     this.row = row;
     this.column = column;
     this.element = element;
-    this.recalculateHeight();
-    this.bindAutoRecalculateHeight();
     this.isAlive = false;
   }
-
-  Cell.prototype.recalculateHeight = function() {
-    $(this.element).height($(this.element).innerWidth());
-  };
-
-  Cell.prototype.bindAutoRecalculateHeight = function() {
-    var self = this;
-    $(window).resize(function() {
-      self.recalculateHeight();
-    });
-  };
 
   Cell.prototype.die = function() {
     this.isAlive = false;
