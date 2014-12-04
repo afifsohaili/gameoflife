@@ -9,8 +9,9 @@ define(["world"], function(world) {
 
   Life.prototype.start = function(interval) {
     var self = this;
+
     return setInterval(function() {
-              self.nextGeneration = world.draw(self.world.options);
+              self.nextGeneration = world.map(self.world.options);
               self.reproduce();
             }, interval);
   };
@@ -35,5 +36,11 @@ define(["world"], function(world) {
     this.world.redraw();
   };
 
-  return new Life();
+  return {
+    run: function(world) {
+      life = new Life();
+      life.attachWorld(world);
+      return life;
+    }
+  }
 });
