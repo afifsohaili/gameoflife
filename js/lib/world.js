@@ -63,7 +63,7 @@ define(["cell"], function(cell) {
   };
 
   return {
-    draw: function(options) {
+    map: function(options) {
       var world = (new World(options));
       world.draw
       return world;

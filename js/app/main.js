@@ -1,5 +1,5 @@
 require(["pattern", "world", "life"], function(pattern, world, life) {
-  world = world.draw({
+  world = world.map({
     rows: 30,
     columns: 50,
     world: "#world",
