@@ -10,10 +10,12 @@ define(function() {
     var self = this;
     $(startButton).on('click', function() {
       self.intervalInstance = self.life.start(self.getIntervalSpecified());
+      $(startButton).prop('disabled', true);
     });
     $(stopButton).on('click', function() {
       clearInterval(self.intervalInstance);
       self.intervalInstance = null;
+      $(startButton).prop('disabled', false);
     });
   };
 
