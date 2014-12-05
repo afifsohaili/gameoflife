@@ -1,6 +1,5 @@
 define(["cell"], function(cell) {
   var World = function(options) {
-    // constructor operations
     this.cells = [];
     this.rows = options.rows;
     this.columns = options.columns;
