@@ -9,6 +9,10 @@ define(function() {
     this.isAlive = false;
   }
 
+  Cell.prototype.getId = function() {
+    return "cell" + this.row + "_" + this.column;
+  };
+
   Cell.prototype.die = function() {
     this.isAlive = false;
   };
