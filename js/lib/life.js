@@ -37,26 +37,26 @@ define(["world"], function(world) {
     console.log("Reproducing...");
     if (this.world.hasLiveCells()) {
       var potentialCells = this.getCellsWithPotentialToLive();
-      var world = this.world;
-      var nextGeneration = this.nextGeneration;
-      potentialCells.map(function(cell) {
-        var cellChild = nextGeneration.getCellAt(cell.row, cell.column);
-        var livingNeighborsCount = world.getLivingNeighborsForCellAt(cell.row, cell.column).length;
-        if (livingNeighborsCount == 3) {
-          cellChild.revive();
-          nextGeneration.markLiveCells(cellChild);
-        }
-        else if (livingNeighborsCount == 2 && cell.isAlive) {
-          cellChild.revive();
-          nextGeneration.markLiveCells(cellChild);
-        }
-        else {
-          cellChild.die();
-        }
-      });
+      this.produceNextGeneration(potentialCells);
     }
     this.world = this.nextGeneration;
     this.world.redraw();
+  };
+
+  Life.prototype.produceNextGeneration = function(potentialCells) {
+    var world = this.world;
+    var nextGeneration = this.nextGeneration;
+    potentialCells.map(function(cell) {
+      var cellChild = nextGeneration.getCellAt(cell.row, cell.column);
+      var livingNeighborsCount = world.getLivingNeighborsForCellAt(cell.row, cell.column).length;
+      if (livingNeighborsCount == 3 || (livingNeighborsCount == 2 && cell.isAlive)) {
+        cellChild.revive();
+        nextGeneration.markLiveCells(cellChild);
+      }
+      else {
+        cellChild.die();
+      }
+    });
   };
 
   return {

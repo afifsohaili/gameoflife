@@ -75,8 +75,7 @@ define(["cell"], function(cell) {
 
   return {
     map: function(options) {
-      var world = (new World(options));
-      return world;
+      return (new World(options));
     }
   }
 });
