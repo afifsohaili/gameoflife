@@ -34,7 +34,7 @@ define(["world"], function(world) {
   };
 
   Life.prototype.reproduce = function() {
-    console.log("Reproducing...");
+    console.log("Populating next generation...");
     if (this.world.hasLiveCells()) {
       var potentialCells = this.getCellsWithPotentialToLive();
       this.produceNextGeneration(potentialCells);
