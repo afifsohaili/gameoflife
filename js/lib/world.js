@@ -24,6 +24,17 @@ define(["cell"], function(cell) {
     });
   };
 
+  World.prototype.hasLiveCells = function() {
+    return this.liveCells ? (this.liveCells.length > 0 ? true : false) : false;
+  };
+
+  World.prototype.markLiveCells = function(cell) {
+    if (typeof this.liveCells === 'undefined') {
+      this.liveCells = new Array()
+    }
+    this.liveCells.push(cell);
+  };
+
   World.prototype.init = function() {
     var world = $(this.worldElement);
     world.html("");
@@ -65,7 +76,6 @@ define(["cell"], function(cell) {
   return {
     map: function(options) {
       var world = (new World(options));
-      world.draw
       return world;
     }
   }

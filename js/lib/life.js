@@ -16,21 +16,44 @@ define(["world"], function(world) {
             }, interval);
   };
 
-  Life.prototype.reproduce = function() {
-    for (var row = 0; row < this.world.rows; row++) {
-      for (var column = 0; column < this.world.columns; column++) {
-        var currentCell = this.nextGeneration.getCellAt(row, column);
-        var livingNeighborsCount = this.world.getLivingNeighborsForCellAt(row, column).length;
-        if (livingNeighborsCount == 3) {
-          currentCell.revive();
+  Life.prototype.getCellsWithPotentialToLive = function() {
+    var cells = new Array()
+    var cellsCounter = {};
+    var world = this.world;
+    this.world.liveCells.map(function(cell) {
+      var cellNeighbors = cell.getNeighbors(world.rows, world.columns);
+      cellNeighbors.map(function(neighborPosition) {
+        neighbor = world.getCellAt(neighborPosition[0], neighborPosition[1]);
+        if (!cellsCounter.hasOwnProperty(neighbor.row+","+neighbor.column)) {
+          cells.push(neighbor);
+          cellsCounter[neighbor.row+","+neighbor.column] = 1;
         }
-        else if (livingNeighborsCount == 2 && this.world.getCellAt(row, column).isAlive) {
-          currentCell.revive();
+      });
+    });
+    return cells.concat(this.world.liveCells);
+  };
+
+  Life.prototype.reproduce = function() {
+    console.log("Reproducing...");
+    if (this.world.hasLiveCells()) {
+      var potentialCells = this.getCellsWithPotentialToLive();
+      var world = this.world;
+      var nextGeneration = this.nextGeneration;
+      potentialCells.map(function(cell) {
+        var cellChild = nextGeneration.getCellAt(cell.row, cell.column);
+        var livingNeighborsCount = world.getLivingNeighborsForCellAt(cell.row, cell.column).length;
+        if (livingNeighborsCount == 3) {
+          cellChild.revive();
+          nextGeneration.markLiveCells(cellChild);
+        }
+        else if (livingNeighborsCount == 2 && cell.isAlive) {
+          cellChild.revive();
+          nextGeneration.markLiveCells(cellChild);
         }
         else {
-          currentCell.die();
+          cellChild.die();
         }
-      }
+      });
     }
     this.world = this.nextGeneration;
     this.world.redraw();

@@ -11,9 +11,12 @@ define(function() {
   }
 
   Pattern.prototype.generate = function(cells, row, column) {
-    for (var i = 0; i < cells.length; i++) {
-      this.world.getCellAt(row + cells[i][0], column + cells[i][1]).revive();
-    }
+    var world = this.world;
+    cells.map(function(cellCoordinate) {
+      var cell = world.getCellAt(row + cellCoordinate[0], column + cellCoordinate[1]);
+      cell.revive();
+      world.markLiveCells(cell);
+    });
   };
 
   Pattern.prototype.acorn = function() {
