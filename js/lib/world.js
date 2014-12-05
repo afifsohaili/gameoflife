@@ -1,25 +1,33 @@
 define(["cell"], function(cell) {
   var World = function(options) {
-    this.cells = [];
     this.rows = options.rows;
     this.columns = options.columns;
     this.worldElement = options.world;
     this.cellTemplate = options.cellTemplate;
-    this.options = options;
     this.init();
-    this.associateCells();
   }
 
-  World.prototype.associateCells = function() {
-    for (var row = 0; row < this.rows; row++) {
-      this.cells[row] = new Array(this.columns);
+  World.prototype.init = function() {
+    var worldElement = $(this.worldElement);
+    worldElement.html("");
+    for (var rowIndex = 0; rowIndex < this.rows; rowIndex++) {
+      var rowContent = "<tr>"
+      for (var columnIndex = 0; columnIndex < this.columns; columnIndex++) {
+        rowContent += this.cellTemplate;
+      }
+      worldElement.append(rowContent + "</tr>");
     }
+    this.associateCells();
+  };
+
+  World.prototype.associateCells = function() {
+    this.cells = {};
     var self = this;
     $(self.worldElement + " td").each(function(index) {
-      row = parseInt(index / self.columns);
-      column = index % self.columns;
-      self.cells[row][column] = cell.spawn(this, row, column);
-      var x = 0;
+      var row = parseInt(index / self.columns);
+      var column = index % self.columns;
+      var newCell = cell.spawn(this, row, column);
+      self.cells[newCell.getId()] = newCell;
     });
   };
 
@@ -34,29 +42,15 @@ define(["cell"], function(cell) {
     this.liveCells.push(cell);
   };
 
-  World.prototype.init = function() {
-    var world = $(this.worldElement);
-    world.html("");
-    for (var rowIndex = 0; rowIndex < this.rows; rowIndex++) {
-      var rowContent = "<tr>"
-      for (var columnIndex = 0; columnIndex < this.columns; columnIndex++) {
-        rowContent += this.cellTemplate;
-      }
-      world.append(rowContent + "</tr>");
-    }
-  };
-
   World.prototype.redraw = function() {
-    for (var row = 0; row < this.cells.length; row++) {
-      for (var column = 0; column < this.cells[row].length; column++) {
-        var currentCell = this.getCellAt(row,column);
-        currentCell.redraw();
-      }
-    }
+    var cells = this.cells;
+    Object.keys(cells).map(function(key) {
+      cells[key].redraw();
+    });
   };
 
   World.prototype.getCellAt = function (row, column) {
-    return this.cells[row][column];
+    return this.cells["cell" + row + "_" + column];
   };
 
   World.prototype.getLivingNeighborsForCellAt = function(row, column) {
