@@ -43,7 +43,6 @@ define(["world"], function(world) {
       var potentialCells = this.getCellsWithPotentialToLive();
       this.produceNextGeneration(potentialCells);
     }
-    this.world.redraw();
   };
 
   Life.prototype.produceNextGeneration = function(potentialCells) {

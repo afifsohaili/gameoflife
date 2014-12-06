@@ -41,18 +41,13 @@ define(["cell"], function(cell) {
     }
     if (!this.liveCells.hasOwnProperty(cell.getId())) {
       this.liveCells[cell.getId()] = cell;
+      cell.redraw();
     }
   };
 
   World.prototype.markDeadCells = function(cell) {
     delete this.liveCells[cell.getId()];
-  };
-
-  World.prototype.redraw = function() {
-    var cells = this.cells;
-    Object.keys(cells).map(function(key) {
-      cells[key].redraw();
-    });
+    cell.redraw();
   };
 
   World.prototype.getCellAt = function (row, column) {

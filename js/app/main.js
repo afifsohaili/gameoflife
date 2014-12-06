@@ -11,10 +11,9 @@ require(["pattern", "world", "life", "controls"], function(pattern, world, life,
   // pattern.blinker();
   // pattern.acorn();
   pattern.gliderGun();
-  theWorld.redraw();
 
   theLife = life.run(theWorld);
-  
+
   controls.attachTo({
     life: theLife,
     startButton: "#start-life-btn",
