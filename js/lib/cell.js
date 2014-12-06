@@ -36,11 +36,11 @@ define(function() {
 
   Cell.prototype.getNeighbors = function(maxRow, maxColumn) {
     var possibleNeighbors = new Array();
-    for (var i = -1; i < 2; i++) {
-      for (var j = -1; j < 2; j++) {
-        if (i == j && j == 0) continue;
-        possibleNeighbors.push([this.row + i, this.column + j]);
+    for (var i = 0; i < 9; i++) {
+      if (i == 4) {
+        continue;
       }
+      possibleNeighbors.push([this.row + parseInt(i / 3) - 1, this.column + (i % 3) - 1]);
     }
     return possibleNeighbors.filter(this.withinBoundaries(maxRow, maxColumn));
   };

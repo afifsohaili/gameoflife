@@ -32,14 +32,20 @@ define(["cell"], function(cell) {
   };
 
   World.prototype.hasLiveCells = function() {
-    return this.liveCells ? (this.liveCells.length > 0 ? true : false) : false;
+    return this.liveCells ? (Object.keys(this.liveCells).length > 0 ? true : false) : false;
   };
 
   World.prototype.markLiveCells = function(cell) {
     if (typeof this.liveCells === 'undefined') {
-      this.liveCells = new Array()
+      this.liveCells = {}
     }
-    this.liveCells.push(cell);
+    if (!this.liveCells.hasOwnProperty(cell.getId())) {
+      this.liveCells[cell.getId()] = cell;
+    }
+  };
+
+  World.prototype.markDeadCells = function(cell) {
+    delete this.liveCells[cell.getId()];
   };
 
   World.prototype.redraw = function() {
@@ -50,13 +56,17 @@ define(["cell"], function(cell) {
   };
 
   World.prototype.getCellAt = function (row, column) {
-    return this.cells["cell" + row + "_" + column];
+    return this.getCellById("cell" + row + "_" + column);
+  };
+
+  World.prototype.getCellById = function (id) {
+    return this.cells[id];
   };
 
   World.prototype.getLivingNeighborsForCellAt = function(row, column) {
     var currentCell = this.getCellAt(row, column);
     var neighbors = currentCell.getNeighbors(this.rows, this.columns);
-    var livingNeighbors = []
+    var livingNeighbors = [];
     for (var i = 0; i < neighbors.length; i++) {
       neighborCell = this.getCellAt(neighbors[i][0], neighbors[i][1]);
       if (neighborCell.isAlive) {

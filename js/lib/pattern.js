@@ -12,7 +12,7 @@ define(function() {
 
   Pattern.prototype.generate = function(cells, row, column) {
     var world = this.world;
-    cells.map(function(cellCoordinate) {
+    cells.forEach(function(cellCoordinate, index, array) {
       var cell = world.getCellAt(row + cellCoordinate[0], column + cellCoordinate[1]);
       cell.revive();
       world.markLiveCells(cell);
