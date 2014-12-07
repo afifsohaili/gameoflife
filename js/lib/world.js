@@ -1,5 +1,8 @@
 define(["cell"], function(cell) {
-  var World = function(options) {
+  function World() {
+  }
+
+  World.prototype.initialize = function(options) {
     this.rows = options.rows;
     this.columns = options.columns;
     this.worldElement = options.world;
@@ -71,9 +74,11 @@ define(["cell"], function(cell) {
     return livingNeighbors;
   };
 
+  var world = new World();
   return {
     map: function(options) {
-      return (new World(options));
+      world.initialize(options);
+      return world;
     }
   }
 });
