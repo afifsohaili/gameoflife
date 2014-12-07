@@ -1,16 +1,8 @@
-require(["pattern", "world", "life", "controls"], function(pattern, world, life, controls)
+require(["worldOptions", "patterns/pattern", "world", "patterns/patternGenerator", "life", "controls", "patterns/patternList", "patterns/patternBinding"], function(worldOptions, pattern, world, patternGenerator, life, controls, patternList, patternBinding)
   {
-  theWorld = world.map({
-    rows: 50,
-    columns: 150,
-    world: "#world",
-    cellTemplate: "<td class=\"dead\"></td>"
-  });
+  theWorld = world.map(worldOptions);
 
-  pattern = pattern.initialize(theWorld);
-  // pattern.blinker();
-  // pattern.acorn();
-  pattern.gliderGun();
+  patternGenerator.attach(theWorld);
 
   theLife = life.run(theWorld);
 
@@ -19,5 +11,11 @@ require(["pattern", "world", "life", "controls"], function(pattern, world, life,
     startButton: "#start-life-btn",
     stopButton: "#stop-life-btn",
     intervalLengthInput: "#interval-length-input"
+  });
+
+  Object.keys(patternList).forEach(function (patternName) {
+    var patternInstance = pattern.initialize(patternList[patternName].map(), patternList[patternName].translation);
+    var patternElement = (typeof patternList[patternName].element === "undefined") ? "#" + patternName + "-btn" : patternList[patternName].element;
+    patternBinding.bind(patternInstance, patternElement, patternGenerator);
   });
 });
