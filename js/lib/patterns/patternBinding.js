@@ -10,7 +10,7 @@ define(function() {
   PatternBinding.prototype.bindPatternAndControlUI = function(event) {
     var self = this;
     $(this.controlUI).on(event, function() {
-      var randomPosition = self.patternGenerator.getRandomStartPosition(self.pattern.width, self.pattern.height);
+      var randomPosition = self.patternGenerator.getRandomStartPosition(self.pattern.height, self.pattern.width);
       self.patternGenerator.generate(self.pattern.getCellsMap(), randomPosition.row, randomPosition.column);
     });
   };
