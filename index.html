@@ -19,16 +19,28 @@
         <div class="row">
           <div class="col-xs-12">
             <h1>Conway's Game of Life</h1>
-            <h2>Controls</h2>
           </div>
         </div>
         <div class="row">
-          <label for="interval-length-input" class="control-label">Interval length (ms)</label>
-          <input type="text" class="form-control" id="interval-length-input" placeholder="500" value="500">
-        </div>
-        <div class="row">
-          <button id="start-life-btn" class="btn btn-success btn-sm">Start</button>
-          <button id="stop-life-btn" class="btn btn-danger btn-sm">Stop</button>
+          <div class="col-xs-12 col-md-6">
+            <div class="row">
+              <h2>Controls</h2>
+              <label for="interval-length-input" class="control-label">Interval length (ms)</label>
+              <input type="text" class="form-control" id="interval-length-input" placeholder="500" value="500">
+            </div>
+            <div class="row">
+              <button id="start-life-btn" class="btn btn-success btn-sm">Start</button>
+              <button id="stop-life-btn" class="btn btn-danger btn-sm">Stop</button>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6" id="pattern-controls">
+            <div class="row">
+              <h2>Pattern Generator</h2>
+              <button id="acorn-btn" class="btn btn-default btn-sm">Acorn</button>
+              <button id="glider-gun-btn" class="btn btn-default btn-sm">Glider Gun</button>
+              <button id="random-btn" class="btn btn-default btn-sm">Random</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
