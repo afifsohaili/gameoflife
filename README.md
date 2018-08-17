@@ -5,3 +5,4 @@
 ### To-do:
 - Provide controls for adding multiple popular patterns.
 - ~~Optimize algorithm so that the app processes faster~~ `done`.
+- Use Vue or React.
